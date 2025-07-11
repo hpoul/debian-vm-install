@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+set -xe
+
 # Create debian VM as a KVM guest using virt-install in fully
 # automated way based on preseed.cfg
 
@@ -56,7 +58,7 @@ virt-install \
 --name=${1} \
 --memory=memory=${memory},currentMemory=${current_memory} \
 --vcpus=2 \
---cpu host-model
+--cpu host-model \
 --disk path=/dev/vg0/${1},bus=virtio,cache=none \
 --initrd-inject=preseed.cfg \
 --initrd-inject=postinst.sh \
