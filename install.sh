@@ -47,10 +47,14 @@ wget -q https://github.com/${GITHUB_USERNAME}.keys -O postinst/authorized_keys
 # Create tarball with some stuff we would like to install into the system.
 tar cvfz postinst.tar.gz postinst
 
+memory=$((12*1024))
+current_memory=$((10*1024))
+
+
 virt-install \
 --connect=qemu:///system \
 --name=${1} \
---ram=1024 \
+--memory=memory=${memory},currentMemory=${current_memory} \
 --vcpus=2 \
 --cpu host-model
 --disk path=/dev/vg0/${1},bus=virtio,cache=none \
