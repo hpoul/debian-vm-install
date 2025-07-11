@@ -8,7 +8,7 @@ sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="console=ttyS
 update-grub
 
 # Members of `sudo` group are not asked for password.
-sed -i 's/%sudo\tALL=(ALL:ALL) ALL/%sudo\tALL=(ALL:ALL) NOPASSWD:ALL/g' /etc/sudoers
+#sed -i 's/%sudo\tALL=(ALL:ALL) ALL/%sudo\tALL=(ALL:ALL) NOPASSWD:ALL/g' /etc/sudoers
 
 # Empty message of the day.
 echo -n > /etc/motd
@@ -16,17 +16,17 @@ echo -n > /etc/motd
 # Unpack postinst tarball.
 tar -x -v -z -C/tmp -f /tmp/postinst.tar.gz
 
-# Install SSH key for pin.
-mkdir -m700 /home/pin/.ssh
-cat /tmp/postinst/authorized_keys > /home/pin/.ssh/authorized_keys
-chown -R pin:pin /home/pin/.ssh
+# Install SSH key for herbert.
+mkdir -m700 /home/herbert/.ssh
+cat /tmp/postinst/authorized_keys > /home/herbert/.ssh/authorized_keys
+chown -R herbert:herbert /home/herbert/.ssh
 
 # Install collectd and config.
 #apt-get install -y collectd-core
 #cp /tmp/postinst/collectd.conf /etc/collectd/
 
 # Remove some non-essential packages.
-DEBIAN_FRONTEND=noninteractive apt-get purge -y nano laptop-detect tasksel dictionaries-common emacsen-common iamerican ibritish ienglish-common ispell wamerican intel-microcode iucode-tool discover discover-data libdiscover2 libusb-1.0-0
+#DEBIAN_FRONTEND=noninteractive apt-get purge -y nano laptop-detect tasksel dictionaries-common emacsen-common iamerican ibritish ienglish-common ispell wamerican intel-microcode iucode-tool discover discover-data libdiscover2 libusb-1.0-0
 
 # Set domain name in hosts file
 #sed -i 's/127.0.1.1\t\([a-z]*\).*/127.0.1.1\t\1\.dp\-net\.com\t\1/' /etc/hosts
@@ -40,5 +40,5 @@ APT::Install-Recommends "0";
 APT::Install-Suggests "0";
 EOF
 
-# Make "reboot" command work.
-apt-get install -y python3 dbus
+## Make "reboot" command work.
+#apt-get install -y python3 dbus

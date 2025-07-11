@@ -10,10 +10,11 @@ DOMAIN=`/bin/hostname -d` # Use domain of the host system
 # NB: See postinst.sh for ability to override domain received from
 # DHCP during the install.
 
-GITHUB_USERNAME='your-github-username'
+GITHUB_USERNAME='hpoul'
 
 DIST_URL="http://ftp.debian.org/debian/dists/bookworm/main/installer-amd64/"
-LINUX_VARIANT="debiantesting"
+#LINUX_VARIANT="debiantesting"
+LINUX_VARIANT="debian11"
 # NB: Also see preseed.cfg for debian mirror hostname.
 
 if [ $# -lt 1 ]
@@ -51,7 +52,8 @@ virt-install \
 --name=${1} \
 --ram=1024 \
 --vcpus=2 \
---disk size=16,path=/var/lib/libvirt/images/${1}.img,bus=virtio,cache=none \
+--cpu host-model
+--disk path=/dev/vg0/${1},bus=virtio,cache=none \
 --initrd-inject=preseed.cfg \
 --initrd-inject=postinst.sh \
 --initrd-inject=postinst.tar.gz \
@@ -61,7 +63,7 @@ virt-install \
 --controller usb,model=none \
 --graphics none \
 --noautoconsole \
---network bridge=br0,mac=${MAC},model=virtio \
+--network bridge=br9,mac=${MAC},model=virtio \
 --extra-args="auto=true hostname="${1}" domain="${DOMAIN}" console=tty0 console=ttyS0,115200n8 serial"
 
 rm postinst.tar.gz
