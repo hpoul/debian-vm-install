@@ -35,7 +35,7 @@ chown -R herbert:herbert /home/herbert/.ssh
 #sed -i 's/#supersede.*/supersede domain-name "dp-net.com";/' /etc/dhcp/dhclient.conf
 
 # Change SSH Port to 7722.
-sed -i 's/#Port 22/Port 7722/' /etc/ssh/sshd_config
+sed -i 's/^Port 22/Port 7722/' /etc/ssh/sshd_config
 
 # Do not install recommended packages by default.
 cat > /etc/apt/apt.conf.d/01norecommend << EOF
