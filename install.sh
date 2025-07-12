@@ -57,7 +57,7 @@ virt-install \
 --connect=qemu:///system \
 --name=${1} \
 --memory=memory=${memory},currentMemory=${current_memory} \
---vcpus=2 \
+--vcpus=4 \
 --cpu host-model \
 --disk path=/dev/vg0/${1},bus=virtio,cache=none \
 --initrd-inject=preseed.cfg \
